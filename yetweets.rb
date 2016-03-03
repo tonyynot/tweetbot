@@ -3,10 +3,10 @@ require 'twitter'
 require 'sinatra'
 
 client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "___"
-  config.consumer_secret     = "___"
-  config.access_token        = "___"
-  config.access_token_secret = "___"
+  config.consumer_key        = "Bi6HemnID5eof5xIDSjUMHUy8"
+  config.consumer_secret     = "bbCfxQugTYFedcFvVSRcsODU3ScALNNRQmHzX3FJtSbhZMsJxf"
+  config.access_token        = "2927794471-bJOLUAy6DgUz28EmvfczxEYIvTnFFXynZ734nH4"
+  config.access_token_secret = "V2UclP5JSDL9TAsHI8yQORx5RsznedFoewejn6zkekyh3"
 end
 
 def client.get_all_tweets(user)
