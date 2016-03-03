@@ -1,0 +1,25 @@
+<html>
+<head>
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+<link rel='stylesheet' type='text/css' href="<%= url("/css/normalize.css") %>">
+<link rel='stylesheet' type='text/css' href="<%= url("/css/skeleton.css") %>">
+<link rel='stylesheet' type='text/css' href="<%= url("/css/app.css") %>">
+</head>
+<body>
+<div class="container">
+<div class="row">
+  <div class="four columns">
+
+
+<img src="<%= "../img/#{rand(9)}.png" %>">
+</div>
+<div class="eight columns">
+<h1>Ye Tweets</h1>
+<h2>@KanyeWest: <br><span class="tweet"><%= @tweet %></span></h2>
+<a href="/"><button>Another one.</button></a>
+</div>
+</div>
+</div>
+
+</body>
+</html>

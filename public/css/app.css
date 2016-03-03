@@ -1,0 +1,17 @@
+body {
+  font-family: "Raleway";
+}
+
+span .tweet {
+  font-size: 55px;
+  font-family: "Satisfy";
+}
+
+.container {
+  padding-top: 6rem;
+}
+
+.container img {
+  max-width: 30rem;
+  max-height: 50rem;
+}
