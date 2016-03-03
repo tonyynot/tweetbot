@@ -1,2 +1,2 @@
-require 'tweetbot'
+require './yetweets'
 run Sinatra::Application
