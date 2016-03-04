@@ -1,24 +1,29 @@
 <html>
 <head>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 <link rel='stylesheet' type='text/css' href="<%= url("/css/normalize.css") %>">
 <link rel='stylesheet' type='text/css' href="<%= url("/css/skeleton.css") %>">
 <link rel='stylesheet' type='text/css' href="<%= url("/css/app.css") %>">
 </head>
 <body>
+
 <div class="container">
-<div class="row">
-  <div class="four columns">
-
-
-<img src="<%= "../img/#{rand(9)}.png" %>">
-</div>
-<div class="eight columns">
-<h1>Ye Tweets</h1>
-<h2>@KanyeWest: <br><span class="tweet"><%= @tweet %></span></h2>
-<a href="/"><button>Another one.</button></a>
-</div>
-</div>
+  <!-- Heading -->
+  <div class="ten columns header">
+    <div class="row">
+      <h1>Ye Tweets</h1>
+      <img src="<%= "../img/#{rand(17)}.png" %>" class="u-max-full-width">
+    </div>
+  </div>
+    <!-- Tweet -->
+    <div class="ten columns">
+      <div class="row">
+      <p>@KanyeWest: <span class="tweet"><%= @tweet %></span></p>
+        <!-- Refresh button -->
+        <a href="/"><button>Another one.</button></a>
+    </div>
+  </div>
 </div>
 
 </body>

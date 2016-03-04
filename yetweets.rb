@@ -2,6 +2,9 @@
 require 'twitter'
 require 'sinatra'
 
+class Tweet < ActiveRecord::base
+end
+
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = "Bi6HemnID5eof5xIDSjUMHUy8"
   config.consumer_secret     = "bbCfxQugTYFedcFvVSRcsODU3ScALNNRQmHzX3FJtSbhZMsJxf"
@@ -19,8 +22,24 @@ def client.get_all_tweets(user)
 end
 
 get '/' do
-  client.get_all_tweets("kanyewest").sample(1).each do |tweet|
+
+  newest_tweet = Tweet.find(:all, :order => "created_at desc", :limit => 1)
+
+  if Time.new() <= newest_tweet.created_at + "15 mins" do
+    client.get_all_tweets('kanyewest').each do |tweet|
+      # existing twitter filter code
+      
+      @tweet = Tweet.new
+      @tweet.text = tweet.text
+      @tweet.save
+    end
+  end
+    random_offset = rand(Tweet.count)
+    display_tweet = Tweet.offset(random_offset).first
+
+    client.get_all_tweets("kanyewest").sample(1).each do |tweet|
     @tweet = tweet.text
+
   end
   erb :index
 end
