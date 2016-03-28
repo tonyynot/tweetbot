@@ -1,15 +1,30 @@
-#!/usr/bin/env ruby
+
 require 'twitter'
 require 'sinatra'
+require 'dm-core'
+require 'dm-timestamps'
+require 'dm-validations'
+require 'dm-migrations'
 
-class Tweet < ActiveRecord::base
+DataMapper.setup :default, "sqlite://#{Dir.pwd}/database.db"
+
+class StoredTweet
+    include DataMapper::Resource
+    property :id        , Serial
+    property :tweet     , String
+    property :created_at, DateTime
+end
+
+configure :development do
+    # DataMapper.auto_upgrade!
+    StoredTweet.auto_migrate! unless StoredTweet.storage_exists?
 end
 
 client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "Bi6HemnID5eof5xIDSjUMHUy8"
-  config.consumer_secret     = "bbCfxQugTYFedcFvVSRcsODU3ScALNNRQmHzX3FJtSbhZMsJxf"
-  config.access_token        = "2927794471-bJOLUAy6DgUz28EmvfczxEYIvTnFFXynZ734nH4"
-  config.access_token_secret = "V2UclP5JSDL9TAsHI8yQORx5RsznedFoewejn6zkekyh3"
+  config.consumer_key        = "rI1Zmi5vARGQU23a65EDy2x4S"
+  config.consumer_secret     = "7pK6YSWXukDPLNYjw2hxsLd4Ir4BR310aLRI0vKJPSqQZtqDK5"
+  config.access_token        = "2927794471-CoI0DBDuFzIRLlVk5eZZsdtSB1ZiHKVmh9au1S7"
+  config.access_token_secret = "xnvCskYrDCfuwiRdDRQcunfsUHCv1c81fPjkhoD9vObLY"
 end
 
 def client.get_all_tweets(user)
@@ -23,23 +38,25 @@ end
 
 get '/' do
 
-  newest_tweet = Tweet.find(:all, :order => "created_at desc", :limit => 1)
+  newest_tweet = StoredTweet.last()
 
-  if Time.new() <= newest_tweet.created_at + "15 mins" do
-    client.get_all_tweets('kanyewest').each do |tweet|
+
+  if newest_tweet.nil? || Time.new(newest_tweet.created_at) <= Time.now + 15*60 #check created_at
+    client.get_all_tweets('TheDonald').each do |tweet|
       # existing twitter filter code
       
-      @tweet = Tweet.new
-      @tweet.text = tweet.text
+      @tweet = StoredTweet.new
+      @tweet.tweet = tweet.text
       @tweet.save
     end
   end
-    random_offset = rand(Tweet.count)
-    display_tweet = Tweet.offset(random_offset).first
+    random_offset = rand(StoredTweet.count) #count might break
+    display_tweet = StoredTweet.offset(random_offset).first #offset might break
 
-    client.get_all_tweets("kanyewest").sample(1).each do |tweet|
+    client.get_all_tweets("TheDonald").sample(1).each do |tweet|
     @tweet = tweet.text
 
-  end
+    end
+
   erb :index
-end
+  end

@@ -8,23 +8,24 @@
 </head>
 <body>
 
-<div class="container">
-  <!-- Heading -->
-  <div class="ten columns header">
-    <div class="row">
-      <h1>Ye Tweets</h1>
-      <img src="<%= "../img/#{rand(17)}.png" %>" class="u-max-full-width">
-    </div>
-  </div>
-    <!-- Tweet -->
-    <div class="ten columns">
-      <div class="row">
-      <p>@KanyeWest: <span class="tweet"><%= @tweet %></span></p>
-        <!-- Refresh button -->
-        <a href="/"><button>Another one.</button></a>
-    </div>
-  </div>
-</div>
+    <!-- Main container -->
+    <div class="container">
+      <!-- Heading / Photo -->
+      <div class="ten columns header">
+        <div class="row">
+          <h1>Ye Tweets</h1>
+          <img src="<%= "../img/#{rand(17)}.png" %>" class="u-max-full-width">
+        </div>
+      </div><!--end photo column-->
+        <!-- Tweet -->
+      <div class="ten columns">
+        <div class="row">
+          <p>@KanyeWest: <span class="tweet"><%= @tweet %></span></p>
+            <!-- Refresh button -->
+            <a href="/"><button>Another one.</button></a>
+        </div><!--end tweet row-->
+      </div><!--end tweet column-->
+    </div><!--end main container-->
 
 </body>
 </html>
