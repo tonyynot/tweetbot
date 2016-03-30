@@ -40,23 +40,25 @@ get '/' do
 
   newest_tweet = StoredTweet.last()
 
-
-  if newest_tweet.nil? || Time.new(newest_tweet.created_at) <= Time.now + 15*60 #check created_at
-    client.get_all_tweets('TheDonald').each do |tweet|
-      # existing twitter filter code
+  if newest_tweet.nil? || newest_tweet.created_at < DateTime.now - ((1/24.0) / 4.0) #check created_at
+    client.get_all_tweets('realDonaldTrump').each do |tweet|
+    #   # existing twitter filter code
       
       @tweet = StoredTweet.new
       @tweet.tweet = tweet.text
+      # @tweet.tweet = "Test Tweet"
       @tweet.save
+
+      puts 'API CALL'
     end
   end
-    random_offset = rand(StoredTweet.count) #count might break
-    display_tweet = StoredTweet.offset(random_offset).first #offset might break
+    
+    @display_tweet = StoredTweet.first(:offset => rand(StoredTweet.count)) #offset might break
 
-    client.get_all_tweets("TheDonald").sample(1).each do |tweet|
-    @tweet = tweet.text
+    # # client.get_all_tweets("realDonaldTrump").sample(1).each do |tweet|
+    # # @tweet = tweet.text
 
-    end
+    # end
 
   erb :index
   end
