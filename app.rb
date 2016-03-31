@@ -21,10 +21,10 @@ configure :development do
 end
 
 client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "rI1Zmi5vARGQU23a65EDy2x4S"
-  config.consumer_secret     = "7pK6YSWXukDPLNYjw2hxsLd4Ir4BR310aLRI0vKJPSqQZtqDK5"
-  config.access_token        = "2927794471-CoI0DBDuFzIRLlVk5eZZsdtSB1ZiHKVmh9au1S7"
-  config.access_token_secret = "xnvCskYrDCfuwiRdDRQcunfsUHCv1c81fPjkhoD9vObLY"
+  config.consumer_key        = "___"
+  config.consumer_secret     = "___"
+  config.access_token        = "___"
+  config.access_token_secret = "___"
 end
 
 def client.get_all_tweets(user)
