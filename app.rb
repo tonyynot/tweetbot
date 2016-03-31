@@ -32,7 +32,7 @@ def client.get_all_tweets(user)
     options = {count: 200, include_rts: false, include_url: false}
     options[:max_id] = max_id unless max_id.nil?
     @timeline = user_timeline(user, options)
-    @timeline.reject! { |item| item.text =~ /http/ }
+    @timeline.reject! { |item| item.text =~ /(http|#|@)/ }
   end
 end
 
