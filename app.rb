@@ -7,7 +7,7 @@ require 'dm-validations'
 require 'dm-migrations'
 require 'datamapper'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/database')
+DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/database.db")
 
 class StoredTweet
     include DataMapper::Resource
