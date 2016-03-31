@@ -6,7 +6,7 @@ require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-migrations'
 
-DataMapper.setup :default, "sqlite://#{Dir.pwd}/database.db"
+DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/database.db")
 
 class StoredTweet
     include DataMapper::Resource
@@ -41,12 +41,10 @@ get '/' do
   newest_tweet = StoredTweet.last()
 
   if newest_tweet.nil? || newest_tweet.created_at < DateTime.now - ((1/24.0) / 4.0) #check created_at
-    client.get_all_tweets('realDonaldTrump').each do |tweet|
-    #   # existing twitter filter code
+    client.get_all_tweets('KanyeWest').each do |tweet|
       
       @tweet = StoredTweet.new
       @tweet.tweet = tweet.text
-      # @tweet.tweet = "Test Tweet"
       @tweet.save
 
       puts 'API CALL'
@@ -54,11 +52,6 @@ get '/' do
   end
     
     @display_tweet = StoredTweet.first(:offset => rand(StoredTweet.count)) #offset might break
-
-    # # client.get_all_tweets("realDonaldTrump").sample(1).each do |tweet|
-    # # @tweet = tweet.text
-
-    # end
 
   erb :index
   end

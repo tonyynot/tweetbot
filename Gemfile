@@ -2,15 +2,12 @@ source 'https://rubygems.org'
 
   gem 'twitter'
   gem 'sinatra'
-  gem 'activerecord'
-  gem 'sinatra-activerecord'
-  gem 'rake'
+  gem 'datamapper'
 
 group :development do
- gem 'sqlite3'
- gem "tux"
+  gem 'dm-sqlite-adapter'
 end
 
 group :production do
- gem 'pg'
+  gem 'dm-postgres-adapter'
 end
